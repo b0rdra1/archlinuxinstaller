@@ -5,6 +5,8 @@ if [ "$(id -u)" -ne 0 ]; then
   echo "Этот скрипт нужно запускать с правами root!"
   exit 1
 fi
+# Очищаем диск /dev/sdb
+echo -e "o\nw" | fdisk /dev/sdb
 
 # Запуск fdisk для создания разделов
 echo -e "o\nn\np\n1\n\n+512M\nt\n1\nn\np\n2\n\n+${SWAP_SIZE}M\nt\n2\n82\nn\np\n3\n\n\nw" | fdisk /dev/sdb
